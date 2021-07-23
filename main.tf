@@ -36,7 +36,7 @@ resource "oci_core_internet_gateway" "this" {
   display_name = var.name
 }
 
-resource "oci_core_route_table" "test_route_table" {
+resource "oci_core_route_table" "this" {
   compartment_id = local.vcn.compartment_id
   vcn_id = local.vcn.id
 
