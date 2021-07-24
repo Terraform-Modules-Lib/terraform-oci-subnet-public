@@ -17,7 +17,7 @@ locals {
   
   vcn = data.oci_core_vcn.this
   subnet = module.subnet.subnet
-  // routing_table = oci_core_route_table.this
+  routing_table = oci_core_route_table.routing_table
 }
 
 data "oci_core_vcn" "this" {
@@ -33,3 +33,7 @@ module "subnet" {
   public = true
 }
 
+resource "oci_core_route_table_attachment" "routing" {
+  subnet_id = local.subnet.id
+  route_table_id = local.routing_table.id
+}
