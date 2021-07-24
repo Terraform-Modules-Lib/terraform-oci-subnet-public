@@ -16,25 +16,24 @@ locals {
   name = var.name
   
   vcn = data.oci_core_vcn.this
-  subnet = oci_core_subnet.this
-  routing_table = oci_core_route_table.this
+  subnet = module.subnet.subnet
+  // routing_table = oci_core_route_table.this
 }
 
 data "oci_core_vcn" "this" {
   vcn_id = local.vcn_id
 }
 
-resource "oci_core_subnet" "this" {
-  compartment_id = local.vcn.compartment_id
-  vcn_id = local.vcn.id
-  prohibit_public_ip_on_vnic = false
-
-  cidr_block = local.cidr
-  route_table_id = local.routing_table.id
-  display_name = local.name
-  dns_label = local.name
+module "subnet" {
+  source  = "Terraform-Modules-Lib/subnet/oci"
+  
+  loca.vcn.id
+  name = local.name
+  cidr = local.cidr
+  public = true
 }
 
+/*
 resource "oci_core_internet_gateway" "this" {
   compartment_id = local.vcn.compartment_id
   vcn_id = local.vcn.id
@@ -56,3 +55,4 @@ resource "oci_core_route_table" "this" {
     destination = "0.0.0.0/0"
   }]
 }
+*/
