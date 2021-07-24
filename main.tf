@@ -27,7 +27,7 @@ data "oci_core_vcn" "this" {
 module "subnet" {
   source  = "Terraform-Modules-Lib/subnet/oci"
   
-  loca.vcn.id
+  vcn_id = local.vcn.id
   name = local.name
   cidr = local.cidr
   public = true
