@@ -15,6 +15,7 @@ locals {
   cidr = var.cidr
   name = var.name
   internet_gw_id = var.internet_gw_id
+  acl = var.acl
   
   vcn = data.oci_core_vcn.this
   subnet = module.subnet.subnet
@@ -32,6 +33,8 @@ module "subnet" {
   name = local.name
   cidr = local.cidr
   public = true
+  
+  acl = local.acl
 }
 
 resource "oci_core_route_table_attachment" "routing" {
