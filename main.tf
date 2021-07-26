@@ -14,6 +14,7 @@ locals {
   vcn_id = var.vcn_id
   cidr = var.cidr
   name = var.name
+  internet_gw_id = var.internet_gw_id
   
   vcn = data.oci_core_vcn.this
   subnet = module.subnet.subnet
